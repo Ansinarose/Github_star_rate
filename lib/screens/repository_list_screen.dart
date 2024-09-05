@@ -1,7 +1,9 @@
+
 import 'package:flutter/material.dart';
+import 'package:github_star_app/common/constants/custom_appbar.dart';
+import 'package:github_star_app/common/widgets/repository_list.dart';
 import 'package:provider/provider.dart';
 import '../providers/repository_provider.dart';
-import '../widgets/repository_list_item.dart';
 
 class RepositoryListScreen extends StatefulWidget {
   @override
@@ -31,17 +33,19 @@ class _RepositoryListScreenState extends State<RepositoryListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('GitHub Repositories')),
+     // appBar: AppBar(title: Text('GitHub Repositories')),
+     appBar: CustomAppBar(title: 'Top starred Repositories'),
       body: Consumer<RepositoryProvider>(
         builder: (context, repoProvider, child) {
           if (repoProvider.isLoading && repoProvider.repositories.isEmpty) {
             return Center(child: CircularProgressIndicator());
           }
 
-          return ListView.builder(
+          return ListView.separated(
             controller: _scrollController,
             itemCount: repoProvider.repositories.length +
                 (repoProvider.isLoading ? 1 : 0),
+            separatorBuilder: (context, index) => Divider(),
             itemBuilder: (context, index) {
               if (index == repoProvider.repositories.length) {
                 return Center(child: CircularProgressIndicator());

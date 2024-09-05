@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:github_star_app/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
 import 'providers/repository_provider.dart';
 import 'screens/repository_list_screen.dart';
@@ -12,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-      //  ChangeNotifierProvider(create: (_) => RepositoryProvider()),
+        ChangeNotifierProvider(create: (_) => RepositoryProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-       // home: RepositoryListScreen(),
+        home: SplashScreen(),
       ),
     );
   }
