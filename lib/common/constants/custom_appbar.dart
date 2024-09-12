@@ -10,7 +10,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      title: Text(title, style: AppConstants.appBarTextStyle),
+      title: Center(child: Text(title, style: AppConstants.appBarTextStyle)),
       backgroundColor: AppConstants.primaryColor,
     );
   }

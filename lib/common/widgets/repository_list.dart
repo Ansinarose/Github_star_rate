@@ -12,7 +12,9 @@ class RepositoryListItem extends StatelessWidget {
     return ListTile(
       leading: CircleAvatar(
         backgroundImage: NetworkImage(repository.ownerAvatarUrl),
+        
       ),
+      
       title: Text(
         'Repository: ${repository.name}',
         style: TextStyle(fontWeight: FontWeight.bold),

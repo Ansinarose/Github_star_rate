@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:github_star_app/common/constants/color_constant.dart';
 import 'package:github_star_app/common/constants/custom_appbar.dart';
 import 'package:github_star_app/common/widgets/repository_list.dart';
 import 'package:provider/provider.dart';
@@ -33,8 +34,10 @@ class _RepositoryListScreenState extends State<RepositoryListScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: AppConstants.scaffoldBackgroundColor,
      // appBar: AppBar(title: Text('GitHub Repositories')),
-     appBar: CustomAppBar(title: 'Top starred Repositories'),
+     appBar: CustomAppBar(
+      title: 'Top starred Repositories'),
       body: Consumer<RepositoryProvider>(
         builder: (context, repoProvider, child) {
           if (repoProvider.isLoading && repoProvider.repositories.isEmpty) {
