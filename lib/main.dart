@@ -1,3 +1,5 @@
+// ignore_for_file: unused_import
+
 import 'package:flutter/material.dart';
 import 'package:github_star_app/screens/splash_screen.dart';
 import 'package:provider/provider.dart';
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (_) => RepositoryProvider()),
+        ChangeNotifierProvider(create: (context) => RepositoryProvider()..loadCachedRepositories()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

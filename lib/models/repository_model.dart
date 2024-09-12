@@ -4,6 +4,7 @@ class Repository {
   final int stars;
   final String ownerUsername;
   final String ownerAvatarUrl;
+  final String? localAvatarPath;
 
   Repository({
     required this.name,
@@ -11,6 +12,7 @@ class Repository {
     required this.stars,
     required this.ownerUsername,
     required this.ownerAvatarUrl,
+    this.localAvatarPath
   });
 
   factory Repository.fromJson(Map<String, dynamic> json) {
@@ -30,6 +32,7 @@ class Repository {
       'stars': stars,
       'ownerUsername': ownerUsername,
       'ownerAvatarUrl': ownerAvatarUrl,
+      'localAvatarPath': localAvatarPath,
     };
   }
 }

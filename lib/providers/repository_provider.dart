@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import '../models/repository_model.dart';
 import '../services/api_service.dart';
 import '../services/db_service.dart';
@@ -25,7 +25,7 @@ class RepositoryProvider with ChangeNotifier {
         await _databaseService.insertRepository(repo);
       }
     } catch (e) {
-      print("Error: $e");
+      print("Error fetching repositories: $e");
     }
 
     _isLoading = false;
@@ -33,7 +33,20 @@ class RepositoryProvider with ChangeNotifier {
   }
 
   Future<void> loadCachedRepositories() async {
-    _repositories = await _databaseService.getRepositories();
+    _isLoading = true;
+    notifyListeners();
+
+    try {
+      _repositories = await _databaseService.getRepositories();
+      print("Loaded ${_repositories.length} repositories from cache");
+      for (var repo in _repositories) {
+        print("Repo: ${repo.name}, Local Avatar: ${repo.localAvatarPath}");
+      }
+    } catch (e) {
+      print("Error loading cached repositories: $e");
+    }
+
+    _isLoading = false;
     notifyListeners();
   }
 }

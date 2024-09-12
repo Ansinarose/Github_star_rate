@@ -1,3 +1,4 @@
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
 
 import 'package:flutter/material.dart';
 import 'package:github_star_app/common/constants/color_constant.dart';
@@ -18,26 +19,35 @@ class _RepositoryListScreenState extends State<RepositoryListScreen> {
   @override
   void initState() {
     super.initState();
-    final repoProvider = Provider.of<RepositoryProvider>(context, listen: false);
-    repoProvider.loadCachedRepositories();
-    repoProvider.fetchRepositories(_page);
-
-    _scrollController.addListener(() {
-      if (_scrollController.position.pixels ==
-          _scrollController.position.maxScrollExtent) {
-        _page++;
-        repoProvider.fetchRepositories(_page);
-      }
+    _scrollController.addListener(_onScroll);
+    
+    // Use Future.microtask to schedule the initial data fetch after the build is complete
+    Future.microtask(() {
+      final repoProvider = Provider.of<RepositoryProvider>(context, listen: false);
+      repoProvider.loadCachedRepositories();
+      repoProvider.fetchRepositories(_page);
     });
+  }
+
+  void _onScroll() {
+    if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
+      _page++;
+      Provider.of<RepositoryProvider>(context, listen: false).fetchRepositories(_page);
+    }
+  }
+
+  @override
+  void dispose() {
+    _scrollController.removeListener(_onScroll);
+    _scrollController.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppConstants.scaffoldBackgroundColor,
-     // appBar: AppBar(title: Text('GitHub Repositories')),
-     appBar: CustomAppBar(
-      title: 'Top starred Repositories'),
+      appBar: CustomAppBar(title: 'Top starred Repositories'),
       body: Consumer<RepositoryProvider>(
         builder: (context, repoProvider, child) {
           if (repoProvider.isLoading && repoProvider.repositories.isEmpty) {
