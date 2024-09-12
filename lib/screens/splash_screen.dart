@@ -52,11 +52,11 @@ class _SplashScreenState extends State<SplashScreen> {
             ),
             Text(
               'GitHub Stars',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              style: AppConstants.appBarTextStyle
             ),
             SizedBox(height: 20),
             CircularProgressIndicator(
-               valueColor: AlwaysStoppedAnimation<Color>(AppConstants.primaryColor),
+               valueColor: AlwaysStoppedAnimation<Color>(AppConstants.secondaryColor),
             ), // Progress Indicator to show something is happening
           ],
         ),

@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 class AppConstants {
   // App Colors
   static const Color primaryColor = Color.fromARGB(255, 14, 20, 25);
-  static const Color secondaryColor = Colors.yellow;
-  static const Color scaffoldBackgroundColor = Color.fromARGB(255, 217, 217, 217); // Add Scaffold background color
+  static const Color secondaryColor = Colors.white;
+  static const Color scaffoldBackgroundColor = Color.fromARGB(255, 17, 16, 16); // Add Scaffold background color
 
   // Strings
   static const String appBarTitle = 'GitHub Starred Repos';
