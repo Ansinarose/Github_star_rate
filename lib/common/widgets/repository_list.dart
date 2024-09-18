@@ -4,17 +4,20 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:github_star_app/models/repository_model.dart';
 
+// A widget that displays a repository item in a card with expandable details.
 class RepositoryListItem extends StatefulWidget {
+  // The repository data to display.
   final Repository repository;
 
-  const RepositoryListItem({Key? key, required this.repository})
-      : super(key: key);
+  // Constructor for initializing the repository.
+  const RepositoryListItem({Key? key, required this.repository}) : super(key: key);
 
   @override
   _RepositoryListItemState createState() => _RepositoryListItemState();
 }
 
 class _RepositoryListItemState extends State<RepositoryListItem> {
+  // State variable to track whether the item is expanded or not.
   bool _expanded = false;
 
   @override
@@ -22,6 +25,7 @@ class _RepositoryListItemState extends State<RepositoryListItem> {
     return Card(
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
       child: ExpansionTile(
+        // Displays the repository owner's avatar.
         leading: CircleAvatar(
           backgroundImage: _getAvatarImage(),
           onBackgroundImageError: (exception, stackTrace) {
@@ -29,10 +33,12 @@ class _RepositoryListItemState extends State<RepositoryListItem> {
           },
           child: Text(widget.repository.ownerUsername[0].toUpperCase()),
         ),
+        // Displays the repository name as the title.
         title: Text(
           'Repository: ${widget.repository.name}',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
+        // Displays the repository username and a preview of the description.
         subtitle: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -46,6 +52,7 @@ class _RepositoryListItemState extends State<RepositoryListItem> {
             ),
           ],
         ),
+        // Displays the number of stars in the trailing icon.
         trailing: Row(
           mainAxisSize: MainAxisSize.min,
           children: [
@@ -54,6 +61,7 @@ class _RepositoryListItemState extends State<RepositoryListItem> {
             Text(widget.repository.stars.toString()),
           ],
         ),
+        // Expanded content shows the full description of the repository.
         children: [
           Padding(
             padding: EdgeInsets.all(16),
@@ -63,6 +71,7 @@ class _RepositoryListItemState extends State<RepositoryListItem> {
             ),
           ),
         ],
+        // Toggles expansion state when the tile is clicked.
         onExpansionChanged: (expanded) {
           setState(() {
             _expanded = expanded;
@@ -72,6 +81,7 @@ class _RepositoryListItemState extends State<RepositoryListItem> {
     );
   }
 
+  // Returns an avatar image based on local path or network URL.
   ImageProvider _getAvatarImage() {
     if (widget.repository.localAvatarPath != null && widget.repository.localAvatarPath!.isNotEmpty) {
       print("Using local avatar: ${widget.repository.localAvatarPath}");
@@ -82,6 +92,7 @@ class _RepositoryListItemState extends State<RepositoryListItem> {
     }
   }
 
+  // Provides a preview of the repository description.
   String _getDescriptionPreview() {
     if (widget.repository.description.isEmpty) {
       return 'No description provided for this repository.';
@@ -89,6 +100,7 @@ class _RepositoryListItemState extends State<RepositoryListItem> {
     return widget.repository.description;
   }
 
+  // Provides the full description of the repository.
   String _getFullDescription() {
     if (widget.repository.description.isEmpty) {
       return 'No description provided for this repository.';

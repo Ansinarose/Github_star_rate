@@ -1,16 +1,28 @@
 # github_star_app
 
-A new Flutter project.
+## Overview
 
-## Getting Started
+This Flutter application lists the most starred GitHub repositories created in the last 60 days. It fetches the data from the GitHub API, and displays it in a paginated list. 
 
-This project is a starting point for a Flutter application.
+### Features
 
-A few resources to get you started if this is your first Flutter project:
+- **List the most starred GitHub repositories.**
+- **Details for each repo:**
+  - Repository name.
+  - Repository description.
+  - Number of stars.
+  - Username and avatar of the owner.
+- **Pagination support**: Load more repositories as you scroll.
+  
+### Tech Stack
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- **Flutter**: For UI and mobile app development.
+- **Provider**: State management.
+- **SQFLite**: Local database for caching.
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+### Installation
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Ansinarose/Github_star_rate
+   
