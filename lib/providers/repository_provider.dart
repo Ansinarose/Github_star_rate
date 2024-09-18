@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/foundation.dart';
 import '../models/repository_model.dart';
 import '../services/api_service.dart';
